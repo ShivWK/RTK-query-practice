@@ -28,13 +28,35 @@ function App() {
     })
   }, []);
 
+  let i = 0;
+  while(i < 1000000000) {
+    i++;
+  }
+
+  let j = 0;
+  while(j < 1000000000) {
+    j++;
+  }
+
+  let k = 0;
+  while(k < 1000000000) {
+    k++;
+  }
+
+  let l = 0;
+  while(l < 1000000000) {
+    l++;
+  }
+
  return <>
     {
       isLoading 
       ? <h1>Loading...</h1> 
       : error 
       ? <h1>some error occured</h1>
-      : <TodoList todos={data}/>
+      : data.length > 0 
+      ? <TodoList todos={data}/>
+      : <h1>No todo available</h1>
     }
  </>
 }
