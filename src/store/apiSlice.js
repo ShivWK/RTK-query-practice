@@ -2,33 +2,31 @@
 // Slice also represent a module
 // apiSlice reprents the API ends point of a module
 import axios from 'axios';
-
-
-import { createApi } from "@reduxjs/toolkit/query/react"; //important to import from react beacuse this will give the react hooks which we may use
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"; 
 
 const apiSlice = createApi({
-    baseQuery : async (url)=> {
-        let response = await axios.get(url);
-        let todos = response?.data?.todos;
-        return {data : todos};
-    },
+
+    // baseQuery : async (url)=> {
+    //     let response = await axios.get(url);
+    //     let todos = response?.data?.todos;
+    //     return {data : todos};
+    // },
+
+    baseQuery : fetchBaseQuery({ baseUrl: "https://dummyjson.com" }),
 
     endpoints : function(builder) {
         return {
             getAllTodos : builder.query({
-                query : () => 'https://dummyjson.com/todos',
+                query : () => '/todos',
+                transformResponse : (data) => data?.todos || []
             }),
 
-            getOneTodos : builder.query({
-                query : () => 'https://dummyjson.com/todos/1',
+            getOneTodo : builder.query({
+                query : (id) => `/todos/${id}`,
             }),
         };
     },
 });
 
-console.log(apiSlice)
 export default apiSlice;
-export const {useGetAllTodosQuery} = apiSlice;
-
-// Hook : useQuery : here = use + FunctionName + Query ; Will give data, isLoading, error states.
-// Hook : useMutation : here use + functionName + Mutation ; Will give us the fucntion we given on query key in the mutation object
+export const { useGetAllTodosQuery, useLazyGetOneTodoQuery } = apiSlice;
