@@ -57,10 +57,10 @@ function App() {
       : error 
       ? <h1>some error occured</h1>
       : data.length > 0 
-      // ? <TodoList todos={data}/>
-      // : <h1>No todo available</h1>
-      ? <h1>{data}</h1>
-      : <h1>No data</h1>
+      ? <TodoList todos={data}/>
+      : <h1>No todo available</h1>
+      // ? <h1>{data}</h1>
+      // : <h1>No data</h1>
     }
  </>
 }

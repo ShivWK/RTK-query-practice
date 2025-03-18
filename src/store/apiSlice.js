@@ -1,14 +1,26 @@
 // reducers represents a module
 // Slice also represent a module
 // apiSlice reprents the API ends point of a module
+import axios from 'axios';
+
 
 import { createApi } from "@reduxjs/toolkit/query/react"; //important to import from react beacuse this will give the react hooks which we may use
 
 const apiSlice = createApi({
+    baseQuery : async (url)=> {
+        let response = await axios.get(url);
+        let todos = response?.data?.todos;
+        return {data : todos};
+    },
+
     endpoints : function(builder) {
         return {
             getAllTodos : builder.query({
-                queryFn : () => ({data : "Data from slice"}),
+                query : () => 'https://dummyjson.com/todos',
+            }),
+
+            getOneTodos : builder.query({
+                query : () => 'https://dummyjson.com/todos/1',
             }),
         };
     },
