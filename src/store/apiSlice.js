@@ -12,6 +12,7 @@ const apiSlice = createApi({
     //     return {data : todos};
     // },
 
+    reducerPath : "apiSlice",
     baseQuery : fetchBaseQuery({ baseUrl: "https://dummyjson.com" }),
 
     endpoints : function(builder) {
