@@ -1,26 +1,20 @@
-import axios from 'axios';
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"; 
+import apiSlice from "./apiSlice";
 
-const deleteApiSlice = createApi({
-    reducerPath : "deleteApiSlice",
-    baseQuery : fetchBaseQuery({ baseUrl: "https://dummyjson.com" }),
-
+const deleteApi = apiSlice.injectEndpoints({
     endpoints : function(builder) {
         return {
             deleteTodos : builder.mutation({
-                query : () => ({
+                query : (id) => ({
                     // syntax is same as of fetch request if we do GELETE, POST, ect requests
-                    url : "/todos",
+                    url : `/todos/${id}`,
                     method : "DELETE",
-
                 }),
-
-                transformResponse : (data) => data?.todos || []
             }),
 
         };
-    },
-});
+    }
+})
 
-export default deleteApiSlice;
-export const { useDeleteTodosMutation } = deleteApiSlice;
+// console.log(deleteApi)
+    
+export const { useDeleteTodosMutation } = deleteApi

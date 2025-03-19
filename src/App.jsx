@@ -8,7 +8,9 @@ function App() {
   // const [isLoading , setLoading] = useState(false);
   // const [data, setData] = useState([]);
   // const [error, setError] = useState("");
-  const {data, isLoading, error} = useGetAllTodosQuery();
+  const result = useGetAllTodosQuery();
+  const {data, isLoading, error} =result;
+  // console.log(result)
 
   // useEffect(()=> {
   //   setLoading(true);

@@ -25,9 +25,17 @@ const apiSlice = createApi({
             getOneTodo : builder.query({
                 query : (id) => `/todos/${id}`,
             }),
+
+            addTodo:  builder.mutation({
+                query: (param) => ({
+                    url: "/todos/add",
+                    method: 'POST',
+                    body: JSON.stringify(param)
+                }),
+            }),         
         };
     },
 });
 
 export default apiSlice;
-export const { useGetAllTodosQuery, useLazyGetOneTodoQuery } = apiSlice;
+export const { useGetAllTodosQuery, useLazyGetOneTodoQuery, useAddTodoMutation} = apiSlice;
