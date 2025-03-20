@@ -8,8 +8,12 @@ function App() {
   // const [isLoading , setLoading] = useState(false);
   // const [data, setData] = useState([]);
   // const [error, setError] = useState("");
-  const result = useGetAllTodosQuery();
-  const {data, isLoading, error} =result;
+ 
+  const [show , setShow] = useState(true);
+
+  function handleShow() {
+    setShow(!show); // Toggeling the value
+  }
   // console.log(result)
 
   // useEffect(()=> {
@@ -53,17 +57,10 @@ function App() {
   // }
 
  return <>
-    {
-      isLoading 
-      ? <h1>Loading...</h1> 
-      : error 
-      ? <h1>some error occured</h1>
-      : data.length > 0 
-      ? <TodoList todos={data}/>
-      : <h1>No todo available</h1>
-      // ? <h1>{data}</h1>
-      // : <h1>No data</h1>
-    }
+    <div>
+      {show && <TodoList />}
+    <button onClick={handleShow}>{show ? "Hide Todos" : "Show Todos"}</button>
+    </div>
  </>
 }
 

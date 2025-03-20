@@ -5,7 +5,7 @@ import { useDeleteTodosMutation } from "../../store/deleteApiSlice";
 export default function TodoItem({ todo = {} }) {
   const result2 = useLazyGetOneTodoQuery();
   const [trigger, {data, isError, isLoading, error}, lastPromiseInfo] = result2;
-  console.log(lastPromiseInfo)
+  // console.log(lastPromiseInfo)
   const { id, todo:name } = todo;
   const [deleteTodo, result]  = useDeleteTodosMutation();
 

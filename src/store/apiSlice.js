@@ -11,14 +11,18 @@ const apiSlice = createApi({
     //     let todos = response?.data?.todos;
     //     return {data : todos};
     // },
-
+    
     reducerPath : "apiSlice",
+    keepUnusedDataFor : 4,
+    tagTypes : ["GetAllTodos", "AddTodo"],
     baseQuery : fetchBaseQuery({ baseUrl: "https://dummyjson.com" }),
 
     endpoints : function(builder) {
         return {
             getAllTodos : builder.query({
                 query : () => '/todos',
+                // providesTags : ["AddTodo"],
+                // keepUnusedDataFor : 2,
                 transformResponse : (data) => data?.todos || []
             }),
 
@@ -32,6 +36,7 @@ const apiSlice = createApi({
                     method: 'POST',
                     body: JSON.stringify(param)
                 }),
+                providesTags : ["GetAllTodos"],
             }),         
         };
     },
