@@ -12,16 +12,20 @@ const deleteApi = apiSlice.injectEndpoints({
               
                 onQueryStarted : async function (id, { dispatch, queryFulfilled}) {
 
-                        const action = dispatch(
+                    let patchResult; // Store the patchResult to use undo() if needed
+                    try {
+                        patchResult = dispatch(
                             apiSlice.util.updateQueryData("getAllTodos", undefined, (draft) => {
-                                //sraft is a copy of main cached dtat of getAllTodos endepoint it is mutative
                                 return draft.filter(todo => todo.id !== id);
                             })
                         );
-
-                    queryFulfilled.catch(()=> {
-                        action.undo();    
-                    })   
+                
+                        await new Promise((_, reject) => setTimeout(() => reject(new Error("Forced failure")), 1000));
+                     
+                        await queryFulfilled; 
+                    } catch {      
+                            patchResult.undo();       
+                    }
                 },
 
                 invalidatesTags : ["GetAllTodos"],
