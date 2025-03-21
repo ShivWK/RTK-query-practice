@@ -8,7 +8,7 @@ export default function TodoList() {
   const {data, isLoading, error} =result1;
   const result2 = useAddTodoMutation();
   const [ addTodo ] = result2;
-  // console.log("Fetched");
+  console.log("Fetched");
   const {refetch} = useGetAllTodosQuery()
 
   function handleAddTodo() {
