@@ -1,17 +1,6 @@
-// reducers represents a module
-// Slice also represent a module
-// apiSlice reprents the API ends point of a module
-import axios from 'axios';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"; 
 
 const apiSlice = createApi({
-
-    // baseQuery : async (url)=> {
-    //     let response = await axios.get(url);
-    //     let todos = response?.data?.todos;
-    //     return {data : todos};
-    // },
-
     reducerPath : "apiSlice",
     refetchOnFocus : true,
     refetchOnReconnect : true,
@@ -39,7 +28,6 @@ const apiSlice = createApi({
                     body: JSON.stringify(param)
                 }),
                 providesTags : ["AddTodo"],
-                
             }),         
         };
     },
@@ -47,3 +35,15 @@ const apiSlice = createApi({
 
 export default apiSlice;
 export const { useGetAllTodosQuery, useLazyGetOneTodoQuery, useAddTodoMutation} = apiSlice;
+
+
+// reducers represents a module
+// Slice also represent a module
+// apiSlice reprents the API ends point of a module
+
+
+    // baseQuery : async (url)=> {
+    //     let response = await axios.get(url);
+    //     let todos = response?.data?.todos;
+    //     return {data : todos};
+    // },
